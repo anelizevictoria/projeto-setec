@@ -2,13 +2,497 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='55' r='40' fill='%236fe3c1'/><circle cx='38' cy='48' r='7' fill='white'/><circle cx='62' cy='48' r='7' fill='white'/><circle cx='38' cy='50' r='3.5' fill='%23222'/><circle cx='62' cy='50' r='3.5' fill='%23222'/><path d='M40 65 Q50 72 60 65' stroke='%237a4a3a' stroke-width='4' fill='none' stroke-linecap='round'/></svg>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="description" content="Bubi, o Bolotinho — bichinho virtual 2D original para navegador. Cuide, brinque, converse e jogue!" />
-    <title>Bubi · o Bolotinho — Bichinho Virtual</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#7c5cff" />
+    <meta name="description" content="Bubi, o Bolotinho: cuide, brinque, converse e jogue." />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='55' r='40' fill='%236fe3c1'/%3E%3Ccircle cx='38' cy='48' r='7' fill='white'/%3E%3Ccircle cx='62' cy='48' r='7' fill='white'/%3E%3Ccircle cx='38' cy='50' r='3.5' fill='%23222'/%3E%3Ccircle cx='62' cy='50' r='3.5' fill='%23222'/%3E%3Cpath d='M40 65 Q50 72 60 65' stroke='%237a4a3a' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Bubi · anelize</title>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <a class="skip-link" href="#acoes-principal">Pular para ações</a>
+    <div class="app-shell">
+      <header class="topbar" role="banner">
+        <div class="brand-block">
+          <span class="brand-mark" aria-hidden="true">🫧</span>
+          <div>
+            <p class="eyebrow">BUBI · anelize</p>
+            <h1 id="pet-name">Bubi</h1>
+            <p id="pet-mood" class="pet-mood">🙂 Tranquilo · Nv 1</p>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <div id="coin-counter" class="coin-counter" aria-label="Saldo de moedas">
+            <span aria-hidden="true">🪙</span>
+            <strong id="coin-count">50</strong>
+          </div>
+          <button id="save-button" class="icon-button" type="button" data-action="save" aria-label="Salvar progresso" title="Salvar progresso">💾</button>
+          <button class="icon-button" type="button" data-action="open-settings" aria-label="Abrir ajustes" title="Abrir ajustes">⚙️</button>
+        </div>
+      </header>
+
+      <nav id="main-tabs" class="tabs" aria-label="Navegação principal">
+        <button class="tab is-active" type="button" data-tab="casa" aria-current="page">🏠 Casa</button>
+        <button class="tab" type="button" data-tab="loja">🛍️ Loja</button>
+        <button class="tab" type="button" data-tab="mochila">🎒 Mochila</button>
+        <button class="tab" type="button" data-tab="missoes">📋 Missões</button>
+        <button class="tab" type="button" data-tab="jogos">🎮 Jogos</button>
+        <button class="tab" type="button" data-tab="ajustes">⚙️ Ajustes</button>
+      </nav>
+
+      <main id="main-content" class="main-content">
+        <section id="view-casa" class="view is-active" data-view="casa" aria-labelledby="casa-title">
+          <h2 id="casa-title" class="sr-only">Casa do Bubi</h2>
+          <section id="scene" class="scene day" aria-label="Cenário do bichinho">
+            <div class="sky-layer" aria-hidden="true">
+              <span id="scene-sun" class="sun-moon">☀️</span>
+              <span class="cloud cloud-one">☁️</span>
+              <span class="cloud cloud-two">☁️</span>
+              <span id="scene-stars" class="scene-stars is-hidden">✨ ⭐ ✨</span>
+            </div>
+            <div id="decoration-layer" class="decoration-layer is-hidden" aria-hidden="true">
+              <span id="decoration-icon">☁️</span>
+            </div>
+            <div id="speech-bubble" class="speech-bubble" role="status" aria-live="polite">
+              <p id="pet-speech">Oi! Eu sou o Bubi! Vamos brincar?</p>
+            </div>
+            <div class="pet-wrap">
+              <button id="pet-button" class="pet-button" type="button" aria-label="Fazer carinho em Bubi" title="Toque para fazer carinho">
+                <svg id="pet-svg" class="pet-svg" viewBox="0 0 220 210" role="img" aria-label="Bubi, o Bolotinho">
+                  <defs>
+                    <radialGradient id="pet-shine-gradient" cx="0.4" cy="0.3" r="1">
+                      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35" />
+                      <stop offset="45%" stop-color="#ffffff" stop-opacity="0" />
+                      <stop offset="100%" stop-color="#1d8f6f" stop-opacity="0.25" />
+                    </radialGradient>
+                  </defs>
+                  <ellipse cx="110" cy="192" rx="52" ry="10" fill="rgba(0,0,0,0.15)" />
+                  <g class="pet-limbs" aria-hidden="true">
+                    <ellipse class="pet-arm pet-arm-left" cx="38" cy="125" rx="14" ry="22" fill="#5fd6b5" transform="rotate(20 38 125)" />
+                    <ellipse class="pet-arm pet-arm-right" cx="182" cy="125" rx="14" ry="22" fill="#5fd6b5" transform="rotate(-20 182 125)" />
+                    <ellipse cx="82" cy="178" rx="18" ry="12" fill="#3fb898" />
+                    <ellipse cx="138" cy="178" rx="18" ry="12" fill="#3fb898" />
+                  </g>
+                  <ellipse id="pet-body" cx="110" cy="125" rx="72" ry="68" fill="#6fe3c1" />
+                  <ellipse id="pet-body-shine" cx="110" cy="125" rx="72" ry="68" fill="url(#pet-shine-gradient)" />
+                  <ellipse id="pet-highlight" cx="86" cy="90" rx="22" ry="14" fill="#ffffff" opacity="0.45" />
+                  <ellipse id="pet-belly" cx="110" cy="145" rx="34" ry="24" fill="#fff7e6" opacity="0.9" />
+                  <circle cx="62" cy="112" r="11" fill="#ff9db0" opacity="0.85" />
+                  <circle cx="158" cy="112" r="11" fill="#ff9db0" opacity="0.85" />
+                  <g id="eye-open-left" class="eye-group">
+                    <ellipse cx="84" cy="86" rx="14" ry="17" fill="#ffffff" />
+                    <circle class="pet-pupil" cx="84" cy="89" r="7" fill="#2e2a3a" />
+                    <circle cx="81.5" cy="86.5" r="2.6" fill="#ffffff" />
+                  </g>
+                  <g id="eye-open-right" class="eye-group">
+                    <ellipse cx="136" cy="86" rx="14" ry="17" fill="#ffffff" />
+                    <circle class="pet-pupil" cx="136" cy="89" r="7" fill="#2e2a3a" />
+                    <circle cx="133.5" cy="86.5" r="2.6" fill="#ffffff" />
+                  </g>
+                  <g id="eye-sleepy-left" class="eye-group is-hidden">
+                    <ellipse cx="84" cy="88" rx="14" ry="15" fill="#ffffff" />
+                    <circle class="pet-pupil" cx="84" cy="93" r="6" fill="#2e2a3a" />
+                    <circle cx="82" cy="91" r="2.2" fill="#ffffff" />
+                    <path d="M70 78 Q84 70 98 78 L98 66 L70 66 Z" fill="#6fe3c1" />
+                    <path d="M70 78 Q84 70 98 78" stroke="#3a2e2a" stroke-width="4" fill="none" stroke-linecap="round" />
+                  </g>
+                  <g id="eye-sleepy-right" class="eye-group is-hidden">
+                    <ellipse cx="136" cy="88" rx="14" ry="15" fill="#ffffff" />
+                    <circle class="pet-pupil" cx="136" cy="93" r="6" fill="#2e2a3a" />
+                    <circle cx="134" cy="91" r="2.2" fill="#ffffff" />
+                    <path d="M122 78 Q136 70 150 78 L150 66 L122 66 Z" fill="#6fe3c1" />
+                    <path d="M122 78 Q136 70 150 78" stroke="#3a2e2a" stroke-width="4" fill="none" stroke-linecap="round" />
+                  </g>
+                  <g id="eye-closed-left" class="eye-group is-hidden">
+                    <path d="M72 88 Q84 96 96 88" stroke="#3a2e2a" stroke-width="4" fill="none" stroke-linecap="round" />
+                  </g>
+                  <g id="eye-closed-right" class="eye-group is-hidden">
+                    <path d="M124 88 Q136 96 148 88" stroke="#3a2e2a" stroke-width="4" fill="none" stroke-linecap="round" />
+                  </g>
+                  <g id="mouth-smile" class="mouth-group is-hidden">
+                    <path d="M92 112 Q110 130 128 112" stroke="#7a4a3a" stroke-width="5" fill="none" stroke-linecap="round" />
+                  </g>
+                  <g id="mouth-frown" class="mouth-group is-hidden">
+                    <path d="M95 122 Q110 112 125 122" stroke="#7a4a3a" stroke-width="4" fill="none" stroke-linecap="round" />
+                  </g>
+                  <g id="mouth-normal" class="mouth-group">
+                    <path d="M98 116 Q110 124 122 116" stroke="#7a4a3a" stroke-width="4" fill="none" stroke-linecap="round" />
+                  </g>
+                  <g id="mouth-eat" class="mouth-group is-hidden">
+                    <ellipse cx="110" cy="120" rx="12" ry="10" fill="#7a3b2e" />
+                    <ellipse cx="110" cy="124" rx="6" ry="4" fill="#ee8888" />
+                  </g>
+                  <g id="mouth-talk" class="mouth-group is-hidden">
+                    <ellipse class="talking-mouth" cx="110" cy="120" rx="9" ry="7" fill="#7a3b2e" />
+                  </g>
+                  <g id="mouth-o" class="mouth-group is-hidden">
+                    <ellipse cx="110" cy="119" rx="7" ry="9" fill="#7a3b2e" />
+                  </g>
+                  <g id="mouth-line" class="mouth-group is-hidden">
+                    <path d="M95 120 L125 120" stroke="#7a4a3a" stroke-width="5" stroke-linecap="round" />
+                  </g>
+                  <g id="tear" class="face-detail is-hidden" aria-hidden="true">
+                    <path d="M70 100 Q76 110 70 116 Q64 110 70 100" fill="#7ecbff" />
+                  </g>
+                  <g id="zzz" class="zzz-group is-hidden" aria-hidden="true">
+                    <text x="170" y="50" font-size="22">z</text>
+                    <text x="182" y="34" font-size="28">Z</text>
+                    <text x="196" y="14" font-size="34">Z</text>
+                  </g>
+                  <g id="dirty-marks" class="dirty-group is-hidden" aria-hidden="true">
+                    <circle cx="60" cy="60" r="5" />
+                    <circle cx="160" cy="70" r="4" />
+                    <circle cx="145" cy="150" r="5" />
+                    <circle cx="90" cy="45" r="4" />
+                    <circle cx="45" cy="140" r="5" />
+                    <circle cx="120" cy="165" r="3.5" />
+                  </g>
+                  <g id="band-aid" class="face-detail is-hidden" aria-hidden="true">
+                    <rect x="128" y="52" width="26" height="12" rx="4" fill="#ffd9a0" stroke="#c98" />
+                    <circle cx="141" cy="58" r="1.6" fill="#c98" />
+                    <circle cx="136" cy="58" r="1.6" fill="#c98" />
+                    <circle cx="146" cy="58" r="1.6" fill="#c98" />
+                  </g>
+                  <g id="accessory-bow" class="accessory-layer is-hidden" aria-hidden="true">
+                    <g transform="translate(158 42)">
+                      <ellipse cx="-14" cy="0" rx="14" ry="10" fill="#ff7bac" stroke="#d14d84" stroke-width="2" />
+                      <ellipse cx="14" cy="0" rx="14" ry="10" fill="#ff8fb8" stroke="#d14d84" stroke-width="2" />
+                      <circle cx="0" cy="0" r="7" fill="#e0447c" stroke="#b03060" stroke-width="2" />
+                      <circle cx="-2" cy="-2" r="2" fill="#ffd3e3" />
+                    </g>
+                  </g>
+                  <g id="accessory-glasses" class="accessory-layer is-hidden" aria-hidden="true">
+                    <rect x="64" y="72" width="36" height="28" rx="9" fill="#22222e" opacity="0.95" />
+                    <rect x="120" y="72" width="36" height="28" rx="9" fill="#22222e" opacity="0.95" />
+                    <rect x="100" y="80" width="20" height="6" rx="3" fill="#22222e" />
+                    <rect x="68" y="76" width="28" height="7" rx="3.5" fill="#8ecbff" opacity="0.7" />
+                    <rect x="124" y="76" width="28" height="7" rx="3.5" fill="#8ecbff" opacity="0.7" />
+                  </g>
+                  <g id="accessory-hat" class="accessory-layer is-hidden" aria-hidden="true">
+                    <g transform="translate(110 8)">
+                      <polygon points="0,-38 22,14 -22,14" fill="#7c5cff" stroke="#4a2fb5" stroke-width="2" />
+                      <polygon points="-13,-8 13,-8 17,2 -17,2" fill="#ffc93c" />
+                      <polygon points="-6,-22 6,-22 9,-15 -9,-15" fill="#ff7bac" />
+                      <circle cx="0" cy="-40" r="8" fill="#ff8fb8" stroke="#d14d84" stroke-width="2" />
+                    </g>
+                  </g>
+                  <g id="accessory-scarf" class="accessory-layer is-hidden" aria-hidden="true">
+                    <rect x="62" y="152" width="96" height="20" rx="10" fill="#ff5a6e" />
+                    <rect x="62" y="152" width="96" height="8" rx="4" fill="#ff8391" />
+                    <rect x="122" y="168" width="22" height="34" rx="8" fill="#ff5a6e" />
+                    <rect x="122" y="192" width="22" height="6" rx="3" fill="#ffc93c" />
+                    <rect x="122" y="184" width="22" height="4" rx="2" fill="#ffc93c" />
+                  </g>
+                  <g id="accessory-crown" class="accessory-layer is-hidden" aria-hidden="true">
+                    <g transform="translate(110 30)">
+                      <polygon points="-24,12 -24,-6 -12,2 0,-12 12,2 24,-6 24,12" fill="#ffc93c" stroke="#b8860b" stroke-width="2" stroke-linejoin="round" />
+                      <rect x="-24" y="12" width="48" height="7" rx="3" fill="#e0a800" stroke="#b8860b" stroke-width="1.5" />
+                      <circle cx="0" cy="-12" r="4" fill="#ff5a6e" />
+                      <circle cx="-12" cy="2" r="2.5" fill="#7c5cff" />
+                      <circle cx="12" cy="2" r="2.5" fill="#2fbf8f" />
+                    </g>
+                  </g>
+                </svg>
+              </button>
+              <p class="pet-label"><span id="scene-pet-name">Bubi</span> · Bolotinho</p>
+            </div>
+            <div id="pet-effect" class="pet-effect" aria-hidden="true"></div>
+            <div class="ground" aria-hidden="true">🌱 🌼 🌱 🌼 🌱</div>
+          </section>
+
+          <section class="stats-card" aria-labelledby="stats-title">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">COMO ESTÁ O BUBI?</p>
+                <h2 id="stats-title">Necessidades</h2>
+              </div>
+              <span id="weight-label" class="weight-pill">⚖️ Normal</span>
+            </div>
+            <div class="xp-row">
+              <span>⭐ Nv <strong id="level-label">1</strong></span>
+              <div id="xp-bar" class="progress-bar xp-bar" role="progressbar" aria-valuemin="0" aria-valuemax="120" aria-valuenow="0" aria-label="Experiência">
+                <div id="xp-fill" class="progress-fill xp-fill"></div>
+              </div>
+              <span id="xp-label">0/120 XP</span>
+              <span id="friendship-label" class="friendship-label" title="Amizade">💛 10</span>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-row" data-stat="fome">
+                <span class="stat-icon" aria-hidden="true">🍖</span>
+                <span class="stat-label">Saciedade</span>
+                <div id="bar-fome" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80" aria-label="Saciedade">
+                  <div id="fill-fome" class="progress-fill"></div>
+                </div>
+                <span id="value-fome" class="stat-value">80</span>
+              </div>
+              <div class="stat-row" data-stat="felicidade">
+                <span class="stat-icon" aria-hidden="true">😊</span>
+                <span class="stat-label">Felicidade</span>
+                <div id="bar-felicidade" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80" aria-label="Felicidade">
+                  <div id="fill-felicidade" class="progress-fill"></div>
+                </div>
+                <span id="value-felicidade" class="stat-value">80</span>
+              </div>
+              <div class="stat-row" data-stat="energia">
+                <span class="stat-icon" aria-hidden="true">⚡</span>
+                <span class="stat-label">Energia</span>
+                <div id="bar-energia" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="90" aria-label="Energia">
+                  <div id="fill-energia" class="progress-fill"></div>
+                </div>
+                <span id="value-energia" class="stat-value">90</span>
+              </div>
+              <div class="stat-row" data-stat="higiene">
+                <span class="stat-icon" aria-hidden="true">🧼</span>
+                <span class="stat-label">Higiene</span>
+                <div id="bar-higiene" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85" aria-label="Higiene">
+                  <div id="fill-higiene" class="progress-fill"></div>
+                </div>
+                <span id="value-higiene" class="stat-value">85</span>
+              </div>
+              <div class="stat-row" data-stat="saude">
+                <span class="stat-icon" aria-hidden="true">💚</span>
+                <span class="stat-label">Saúde</span>
+                <div id="bar-saude" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="95" aria-label="Saúde">
+                  <div id="fill-saude" class="progress-fill"></div>
+                </div>
+                <span id="value-saude" class="stat-value">95</span>
+              </div>
+            </div>
+          </section>
+
+          <section id="acoes-principal" class="actions-section" aria-labelledby="actions-title">
+            <div class="section-heading compact">
+              <div>
+                <p class="eyebrow">UM CARINHO DE VERDADE</p>
+                <h2 id="actions-title">Cuide do Bubi</h2>
+              </div>
+            </div>
+            <div class="action-grid">
+              <button class="action-button" type="button" data-action="feed" aria-label="Alimentar o bichinho"><span class="action-emoji" aria-hidden="true">🍖</span><span>Alimentar</span></button>
+              <button class="action-button" type="button" data-action="play" aria-label="Brincar com o bichinho"><span class="action-emoji" aria-hidden="true">🎮</span><span>Brincar</span></button>
+              <button class="action-button" type="button" data-action="dance" aria-label="Fazer o bichinho dançar"><span class="action-emoji" aria-hidden="true">🕺</span><span>Dançar</span></button>
+              <button class="action-button" type="button" data-action="pet" aria-label="Fazer carinho"><span class="action-emoji" aria-hidden="true">❤️</span><span>Carinho</span></button>
+              <button id="sleep-button" class="action-button sleep-button" type="button" data-action="sleep" aria-label="Colocar o bichinho para dormir"><span class="action-emoji" aria-hidden="true">🛏️</span><span id="sleep-label">Dormir</span></button>
+              <button class="action-button" type="button" data-action="clean" aria-label="Dar banho no bichinho"><span class="action-emoji" aria-hidden="true">🧼</span><span>Limpar</span></button>
+              <button class="action-button pull-button" type="button" data-action="pull" aria-label="Puxar o bichinho para uma brincadeira"><span class="action-emoji" aria-hidden="true">🫳</span><span>Puxar</span></button>
+              <button class="action-button action-primary" type="button" data-action="talk" aria-label="Conversar com o bichinho"><span class="action-emoji" aria-hidden="true">💬</span><span>Conversar</span></button>
+            </div>
+          </section>
+        </section>
+
+        <section id="view-loja" class="view" data-view="loja" aria-labelledby="shop-title" hidden>
+          <section class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">PEQUENOS TESOUROS</p>
+                <h2 id="shop-title">🛍️ Lojinha do Bubi</h2>
+              </div>
+              <span id="shop-balance" class="balance-pill">🪙 50</span>
+            </div>
+            <p class="panel-intro">Moedas se ganham nos minigames! Comidas podem ser compradas várias vezes; brinquedos, acessórios e decorações são únicos.</p>
+            <div id="shop-filters" class="filter-tabs" role="tablist" aria-label="Categorias da loja">
+              <button class="filter-button is-active" type="button" role="tab" aria-selected="true" data-shop-filter="tudo">🌟 Tudo</button>
+              <button class="filter-button" type="button" role="tab" aria-selected="false" data-shop-filter="comida">🍎 Comidas</button>
+              <button class="filter-button" type="button" role="tab" aria-selected="false" data-shop-filter="brinquedo">🧸 Brinquedos</button>
+              <button class="filter-button" type="button" role="tab" aria-selected="false" data-shop-filter="acessorio">🎀 Acessórios</button>
+              <button class="filter-button" type="button" role="tab" aria-selected="false" data-shop-filter="decoracao">🏠 Decoração</button>
+            </div>
+            <ul id="shop-list" class="item-list" aria-live="polite"></ul>
+          </section>
+        </section>
+
+        <section id="view-mochila" class="view" data-view="mochila" aria-labelledby="inventory-title" hidden>
+          <section class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">TUDO QUE É SEU</p>
+                <h2 id="inventory-title">🎒 Mochila</h2>
+              </div>
+            </div>
+            <p class="panel-intro">Use lanchinhos, vista acessórios, decore o cenário e escolha seus brinquedos.</p>
+            <ul id="inventory-list" class="item-list" aria-live="polite"></ul>
+          </section>
+        </section>
+
+        <section id="view-missoes" class="view" data-view="missoes" aria-labelledby="missions-title" hidden>
+          <section class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">UM POUCO DE CUIDADO POR DIA</p>
+                <h2 id="missions-title">📋 Missões de hoje</h2>
+              </div>
+              <span class="date-pill" id="missions-date">hoje</span>
+            </div>
+            <p class="panel-intro">As tarefas renovam todo dia. Complete e resgate XP; moedas ficam para os minigames.</p>
+            <ul id="missions-list" class="item-list" aria-live="polite"></ul>
+          </section>
+        </section>
+
+        <section id="view-jogos" class="view" data-view="jogos" aria-labelledby="games-title" hidden>
+          <section class="panel games-panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">HORA DA DIVERSÃO</p>
+                <h2 id="games-title">🎮 Minigames</h2>
+              </div>
+              <span class="game-currency">🪙 + XP</span>
+            </div>
+            <p class="panel-intro">Escolha um jogo, supere a rodada e ganhe moedas. Tudo funciona offline.</p>
+            <div id="game-tabs" class="filter-tabs game-tabs" role="tablist" aria-label="Minigames">
+              <button class="filter-button is-active" type="button" role="tab" aria-selected="true" data-game-select="reacao">🎈 Caça-Bolhas</button>
+              <button class="filter-button" type="button" role="tab" aria-selected="false" data-game-select="memoria">🧠 Memória</button>
+              <button class="filter-button" type="button" role="tab" aria-selected="false" data-game-select="pega">🟢 Pega o Bubi</button>
+              <button class="filter-button" type="button" role="tab" aria-selected="false" data-game-select="lanche">🍎 Lanchinho Certo</button>
+            </div>
+            <div id="game-area">
+              <section class="minigame-panel is-active" data-game-panel="reacao" aria-labelledby="bubble-title">
+                <div class="minigame-heading">
+                  <div>
+                    <h3 id="bubble-title">🎈 Caça-Bolhas</h3>
+                    <p>Toque nas bolhas antes que elas desapareçam.</p>
+                  </div>
+                  <span id="bubble-status" class="game-status">20s · 0 pontos</span>
+                </div>
+                <button class="primary-button game-start" type="button" data-action="game-start" data-game="reacao">▶ Começar</button>
+                <div id="bubble-arena" class="bubble-arena" hidden>
+                  <button id="bubble-target" class="bubble-target" type="button" data-action="bubble-pop" aria-label="Estourar bolha" hidden>🫧</button>
+                </div>
+                <p id="bubble-result" class="game-result" role="status"></p>
+              </section>
+
+              <section class="minigame-panel" data-game-panel="memoria" aria-labelledby="memory-title" hidden>
+                <div class="minigame-heading">
+                  <div>
+                    <h3 id="memory-title">🧠 Jogo da Memória</h3>
+                    <p>Encontre todos os pares antes de perder o ritmo.</p>
+                  </div>
+                  <span id="memory-status" class="game-status">0 tentativas</span>
+                </div>
+                <button class="primary-button game-start" type="button" data-action="game-start" data-game="memoria">▶ Começar</button>
+                <div id="memory-grid" class="memory-grid" aria-live="polite"></div>
+                <p id="memory-result" class="game-result" role="status"></p>
+              </section>
+
+              <section class="minigame-panel" data-game-panel="pega" aria-labelledby="catch-title" hidden>
+                <div class="minigame-heading">
+                  <div>
+                    <h3 id="catch-title">🟢 Pega o Bubi</h3>
+                    <p>O Bubi aparece nas tocas. Encontre-o rápido!</p>
+                  </div>
+                  <span id="catch-status" class="game-status">20s · 0 pontos</span>
+                </div>
+                <button class="primary-button game-start" type="button" data-action="game-start" data-game="pega">▶ Começar</button>
+                <div id="holes-grid" class="holes-grid" aria-live="polite" hidden></div>
+                <p id="catch-result" class="game-result" role="status"></p>
+              </section>
+
+              <section class="minigame-panel" data-game-panel="lanche" aria-labelledby="snack-title" hidden>
+                <div class="minigame-heading">
+                  <div>
+                    <h3 id="snack-title">🍎 Lanchinho Certo</h3>
+                    <p>Ouça o pedido do Bubi e escolha o lanche certo.</p>
+                  </div>
+                  <span id="snack-status" class="game-status">Rodada 1/5</span>
+                </div>
+                <button class="primary-button game-start" type="button" data-action="game-start" data-game="lanche">▶ Começar</button>
+                <div id="snack-request" class="snack-request" hidden>
+                  <span class="mini-pet" aria-hidden="true">🫧</span>
+                  <p id="snack-speech">Quero um lanchinho!</p>
+                </div>
+                <div id="snack-options" class="snack-options" hidden></div>
+                <p id="snack-feedback" class="game-result" role="status"></p>
+              </section>
+            </div>
+          </section>
+        </section>
+
+        <section id="view-ajustes" class="view" data-view="ajustes" aria-labelledby="settings-title" hidden>
+          <section class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">DO SEU JEITO</p>
+                <h2 id="settings-title">⚙️ Ajustes</h2>
+              </div>
+            </div>
+            <div class="settings-list">
+              <div class="setting-row">
+                <label for="pet-name-input">Nome do bichinho</label>
+                <div class="setting-control name-control">
+                  <input id="pet-name-input" type="text" maxlength="20" autocomplete="off" value="Bubi" />
+                  <button class="small-button" type="button" data-action="rename">Salvar</button>
+                </div>
+              </div>
+              <label class="setting-row" for="sound-toggle">
+                <span>🔊 Som <small id="sound-support"></small></span>
+                <input id="sound-toggle" type="checkbox" />
+              </label>
+              <div class="setting-row">
+                <label for="volume-slider">🎚️ Volume <span id="volume-label">60%</span></label>
+                <input id="volume-slider" type="range" min="0" max="1" step="0.1" value="0.6" />
+              </div>
+              <label class="setting-row" for="voice-toggle">
+                <span>🗣️ Voz do bichinho <small id="tts-support"></small></span>
+                <input id="voice-toggle" type="checkbox" />
+              </label>
+              <label class="setting-row" for="economy-toggle">
+                <span>🔋 Modo economia <small>pausa a passagem do tempo</small></span>
+                <input id="economy-toggle" type="checkbox" />
+              </label>
+            </div>
+            <div class="capability-card" aria-live="polite">
+              <p>🎤 Microfone: <strong id="stt-support">verificando…</strong></p>
+              <p>🤖 IA: <strong id="ai-support">diálogo local</strong></p>
+            </div>
+            <div class="progress-box">
+              <h3>💾 Progresso</h3>
+              <p class="panel-intro">O progresso é salvo automaticamente neste navegador. Também pode levá-lo com você:</p>
+              <div class="button-row">
+                <button class="secondary-button" type="button" data-action="export">📁 Exportar JSON</button>
+                <label class="secondary-button import-button" for="import-file">📂 Importar JSON</label>
+                <input id="import-file" type="file" accept="application/json,.json" hidden />
+              </div>
+            </div>
+            <div id="reset-box" class="reset-box" hidden>
+              <p>Tem certeza? Isso apaga todo o progresso do Bubi.</p>
+              <div class="button-row">
+                <button class="danger-button" type="button" data-action="reset-confirm">Sim, apagar tudo</button>
+                <button class="small-button" type="button" data-action="reset-cancel">Cancelar</button>
+              </div>
+            </div>
+            <button id="reset-button" class="danger-button reset-button" type="button" data-action="reset-request">🗑️ Resetar progresso</button>
+          </section>
+        </section>
+      </main>
+
+      <div id="chat-overlay" class="chat-overlay" hidden>
+        <section class="chat-dialog" role="dialog" aria-modal="true" aria-labelledby="chat-title">
+          <header class="chat-header">
+            <div>
+              <p class="eyebrow">UMA CONVERSA BONITINHA</p>
+              <h2 id="chat-title">💬 Conversando com <span id="chat-pet-name">Bubi</span></h2>
+            </div>
+            <button class="close-button" type="button" data-action="close-chat" aria-label="Fechar conversa">✕</button>
+          </header>
+          <div id="chat-messages" class="chat-messages" aria-live="polite" aria-label="Mensagens"></div>
+          <div id="chat-voice-status" class="chat-voice-status" aria-live="polite"></div>
+          <p id="chat-moderation" class="chat-moderation" role="status" aria-live="assertive" hidden>Mensagem não enviada. Vamos usar palavras respeitosas. 💛</p>
+          <p id="chat-warning" class="chat-warning" hidden>🔇 A leitura em voz alta não está disponível neste navegador. Você pode continuar digitando.</p>
+          <form id="chat-form" class="chat-form">
+            <label class="sr-only" for="chat-input">Mensagem para o Bubi</label>
+            <input id="chat-input" type="text" maxlength="200" autocomplete="off" placeholder="Digite sua mensagem..." />
+            <button id="mic-button" class="mic-button" type="button" data-action="toggle-voice" aria-label="Falar com microfone" title="Falar com microfone">🎤</button>
+            <button id="send-button" class="send-button" type="button" data-action="send-chat" aria-label="Enviar mensagem">➤</button>
+          </form>
+          <p class="chat-hint">Enter envia · o microfone é opcional</p>
+        </section>
+      </div>
+
+      <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+      <footer class="footer">
+        <p>Bubi · o Bolotinho — um cantinho para cuidar, brincar e conversar.</p>
+        <p>Progresso salvo neste navegador · funciona em arquivo local</p>
+      </footer>
+    </div>
+    <script src="./app.js" defer></script>
   </body>
 </html>

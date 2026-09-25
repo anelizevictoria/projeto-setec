@@ -1,0 +1,1160 @@
+Você é o desenvolvedor principal deste projeto. CONSTRUA um jogo completo de bichinho virtual 2D para navegador, inspirado no conceito de pets virtuais conversacionais, mas totalmente ORIGINAL.
+
+NÃO copie Talking Tom ou qualquer outra franquia. Não utilize personagens, nomes, artes, sons, frases, código ou identidade visual protegidos de terceiros.
+
+IMPORTANTE:
+
+Não fique apenas explicando.
+
+Crie e edite os arquivos do projeto.
+
+Execute os comandos necessários.
+
+Instale dependências quando necessário.
+
+Rode o projeto.
+
+Faça o build.
+
+Teste as funcionalidades.
+
+Corrija os erros encontrados.
+
+Continue trabalhando até existir uma versão funcional e jogável.
+
+Não peça confirmação a cada etapa.
+
+Tome decisões técnicas razoáveis sozinho.
+
+==================================================
+OBJETIVO
+
+Criar um bichinho virtual 2D para navegador, funcionando em celular, tablet e computador.
+
+O jogador deve poder:
+
+cuidar do bichinho;
+
+alimentar;
+
+brincar;
+
+fazer carinho;
+
+limpar;
+
+colocar para dormir;
+
+conversar;
+
+usar voz;
+
+ganhar moedas;
+
+comprar itens;
+
+usar itens;
+
+completar missões;
+
+jogar minigames;
+
+subir de nível;
+
+desbloquear conteúdo;
+
+fechar o navegador e continuar o jogo depois.
+
+O jogo deve funcionar mesmo sem API de IA configurada.
+
+==================================================
+TECNOLOGIA
+
+Use preferencialmente:
+
+React
+
+TypeScript
+
+Vite
+
+CSS
+
+SVG/Canvas
+
+localStorage ou IndexedDB
+
+Se o projeto já possuir uma stack adequada, aproveite a existente.
+
+Não destrua código existente sem necessidade.
+
+==================================================
+PERSONAGEM
+
+Crie um personagem completamente original usando SVG, CSS ou Canvas.
+
+Não dependa de imagens externas para o personagem principal.
+
+O personagem deve ser fofo, moderno e ter identidade própria.
+
+Crie:
+
+corpo;
+
+olhos;
+
+pupilas;
+
+boca;
+
+braços;
+
+pernas;
+
+expressões;
+
+sombras;
+
+animações.
+
+Estados:
+
+idle
+
+happy
+
+sad
+
+hungry
+
+tired
+
+sleeping
+
+eating
+
+playing
+
+talking
+
+surprised
+
+angry
+
+sick
+
+cleaning
+
+celebrating
+
+Crie animações para:
+
+piscar;
+
+respirar;
+
+olhar para os lados;
+
+pular;
+
+comer;
+
+brincar;
+
+dormir;
+
+acordar;
+
+receber carinho;
+
+falar;
+
+comemorar;
+
+subir de nível.
+
+Enquanto estiver parado, faça pequenas animações aleatórias para o personagem parecer vivo.
+
+==================================================
+NECESSIDADES
+
+Crie:
+
+fome;
+
+felicidade;
+
+energia;
+
+higiene;
+
+saúde;
+
+amizade;
+
+XP;
+
+nível;
+
+moedas.
+
+Use valores de 0 a 100 para as necessidades.
+
+Crie regras equilibradas.
+
+Os atributos devem diminuir ou aumentar com o passar do tempo.
+
+Salve a hora da última sessão.
+
+Quando o jogador retornar:
+
+calcule quanto tempo passou;
+
+atualize os atributos;
+
+limite os valores entre 0 e 100;
+
+evite punições exageradas.
+
+O personagem nunca deve morrer permanentemente.
+
+==================================================
+HUMOR
+
+Crie um sistema de humor baseado nos atributos.
+
+Possíveis estados:
+
+feliz;
+
+normal;
+
+triste;
+
+faminto;
+
+cansado;
+
+sujo;
+
+doente;
+
+animado.
+
+O humor deve alterar:
+
+expressão;
+
+animação;
+
+diálogo;
+
+reações.
+
+==================================================
+AÇÕES
+
+Crie botões grandes:
+
+🍖 Alimentar
+🎮 Brincar
+❤️ Carinho
+🛏️ Dormir
+🧼 Limpar
+💬 Conversar
+
+ALIMENTAR:
+
+reduzir fome;
+
+aumentar felicidade;
+
+iniciar animação de comer;
+
+mostrar comida;
+
+dar feedback;
+
+ocasionalmente dar XP.
+
+BRINCAR:
+
+aumentar felicidade;
+
+reduzir energia;
+
+aumentar amizade;
+
+dar XP;
+
+iniciar animação.
+
+CARINHO:
+
+aumentar felicidade;
+
+aumentar amizade;
+
+iniciar animação positiva.
+
+DORMIR:
+
+colocar o personagem para dormir;
+
+recuperar energia;
+
+mudar visual para noite;
+
+impedir ações incompatíveis;
+
+permitir acordar.
+
+LIMPAR:
+
+aumentar higiene;
+
+melhorar saúde;
+
+iniciar animação de limpeza.
+
+CONVERSAR:
+
+abrir sistema de conversa.
+
+==================================================
+INTERFACE
+
+Crie uma interface bonita de jogo casual.
+
+No topo:
+
+nível;
+
+moedas;
+
+configurações.
+
+No centro:
+
+cenário;
+
+personagem;
+
+balão de fala;
+
+efeitos.
+
+Na parte inferior:
+
+barras de necessidades;
+
+botões de ações.
+
+Crie barras para:
+
+fome;
+
+felicidade;
+
+energia;
+
+higiene;
+
+saúde.
+
+Use cores e ícones, mas não dependa apenas das cores.
+
+A interface deve ser mobile-first.
+
+==================================================
+RESPONSIVIDADE
+
+Funcione bem em:
+
+360px;
+
+390px;
+
+430px;
+
+tablets;
+
+notebooks;
+
+desktops.
+
+Priorize touch.
+
+Não dependa de hover.
+
+Evite elementos cortados ou fora da tela.
+
+==================================================
+DIÁLOGO LOCAL
+
+Crie um sistema de diálogos local que funcione sem internet e sem IA.
+
+Personalidade:
+
+fofo;
+
+curioso;
+
+brincalhão;
+
+carinhoso;
+
+engraçado ocasionalmente.
+
+Crie muitas frases diferentes.
+
+As respostas devem considerar:
+
+fome;
+
+felicidade;
+
+energia;
+
+higiene;
+
+saúde;
+
+amizade;
+
+humor;
+
+ação recente.
+
+Evite repetir sempre a mesma frase.
+
+==================================================
+IA
+
+Crie:
+
+src/services/aiService.ts
+
+Prepare integração com uma API de IA.
+
+NUNCA coloque API key secreta diretamente no frontend.
+
+Use variáveis de ambiente.
+
+Se for necessário backend/proxy, crie uma estrutura apropriada.
+
+A IA deve receber contexto limitado:
+
+personalidade;
+
+humor;
+
+necessidades;
+
+nível;
+
+amizade;
+
+ação recente;
+
+últimas mensagens.
+
+A IA deve responder como o bichinho.
+
+Não faça chamadas constantes.
+
+Só chame a IA quando o jogador conversar.
+
+Se não houver API configurada, use automaticamente o diálogo local.
+
+O jogo nunca deve quebrar por falta da IA.
+
+==================================================
+VOZ
+
+Crie:
+
+src/services/speechService.ts
+
+Implemente:
+
+fala para texto;
+
+texto para fala.
+
+Use APIs nativas do navegador quando possível.
+
+Crie botão de microfone.
+
+Durante reconhecimento:
+
+mostrar "Ouvindo...";
+
+mostrar transcrição;
+
+permitir cancelar.
+
+Se o navegador não suportar microfone:
+
+mostrar mensagem amigável;
+
+manter entrada por texto.
+
+Quando o personagem falar:
+
+usar Text-to-Speech;
+
+animar a boca.
+
+Não precisa de lip-sync perfeito.
+
+==================================================
+ÁUDIO
+
+Crie:
+
+src/services/audioService.ts
+
+Suporte:
+
+clique;
+
+alimentação;
+
+carinho;
+
+recompensa;
+
+erro;
+
+nível;
+
+interação.
+
+Se não houver assets de áudio, use Web Audio API para efeitos simples.
+
+Inclua:
+
+som ligado/desligado;
+
+volume.
+
+==================================================
+MOEDAS
+
+Crie sistema de moedas.
+
+O jogador pode ganhar moedas através de:
+
+cuidar do pet;
+
+missões;
+
+minigames;
+
+subir de nível;
+
+atividades.
+
+Nunca permita saldo negativo.
+
+==================================================
+LOJA
+
+Crie uma loja com:
+
+comidas;
+
+brinquedos;
+
+acessórios;
+
+decoração.
+
+Crie pelo menos:
+
+5 comidas;
+5 brinquedos;
+5 acessórios;
+5 decorações.
+
+Todos devem ser originais.
+
+Cada item deve possuir:
+
+id;
+
+nome;
+
+preço;
+
+descrição;
+
+tipo;
+
+efeito;
+
+quantidade ou desbloqueio.
+
+A compra deve descontar moedas corretamente.
+
+Não permita comprar sem saldo.
+
+==================================================
+INVENTÁRIO
+
+Crie inventário.
+
+Permita:
+
+visualizar;
+
+usar;
+
+equipar;
+
+desequipar;
+
+ver quantidade.
+
+Salve tudo.
+
+==================================================
+PROGRESSÃO
+
+Crie XP e níveis.
+
+Atividades dão XP.
+
+Quando subir de nível:
+
+animação;
+
+mensagem;
+
+recompensa;
+
+moedas;
+
+desbloqueios quando apropriado.
+
+==================================================
+MISSÕES
+
+Crie missões diárias.
+
+Exemplos:
+
+alimentar 3 vezes;
+
+brincar 2 vezes;
+
+dar carinho;
+
+limpar;
+
+conversar;
+
+jogar minigame.
+
+Cada missão deve possuir:
+
+objetivo;
+
+progresso;
+
+recompensa;
+
+concluída/não concluída.
+
+Salve o progresso.
+
+Faça as missões mudarem diariamente.
+
+==================================================
+MINIGAMES
+
+Crie pelo menos 2 minigames.
+
+MINIGAME 1:
+Jogo de reação.
+
+Objetos aparecem aleatoriamente.
+
+O jogador toca/clica neles.
+
+Ganhe pontos e moedas.
+
+MINIGAME 2:
+Jogo da memória.
+
+Cartas viradas.
+
+Encontre os pares.
+
+Dê XP e moedas.
+
+Ambos devem funcionar sem backend.
+
+==================================================
+EVENTOS
+
+Crie eventos aleatórios.
+
+Exemplos:
+
+"Estou com fome!"
+"Vamos brincar?"
+"Estou cansado..."
+"Você voltou!"
+"Senti sua falta!"
+"Olha o que encontrei!"
+"Estou muito feliz!"
+
+Use cooldown para não incomodar.
+
+==================================================
+PERSISTÊNCIA
+
+Crie:
+
+src/services/storageService.ts
+
+Salve:
+
+atributos;
+
+XP;
+
+nível;
+
+moedas;
+
+inventário;
+
+acessórios;
+
+missões;
+
+configurações;
+
+última sessão;
+
+progresso.
+
+Use versão do save.
+
+Exemplo:
+
+version: 1
+
+Valide o save.
+
+Se estiver corrompido, recupere ou crie um novo.
+
+Nunca quebre o jogo.
+
+Crie opção de resetar progresso com confirmação.
+
+==================================================
+CONFIGURAÇÕES
+
+Inclua:
+
+som;
+
+volume;
+
+voz;
+
+modo economia;
+
+resetar progresso.
+
+==================================================
+ACESSIBILIDADE
+
+Inclua:
+
+aria-label;
+
+foco de teclado;
+
+botões semânticos;
+
+contraste adequado;
+
+suporte básico para teclado;
+
+feedback textual.
+
+==================================================
+ESTRUTURA
+
+Organize aproximadamente assim:
+
+src/
+components/
+Pet/
+Stats/
+Controls/
+Dialog/
+Shop/
+Inventory/
+Missions/
+MiniGames/
+Settings/
+UI/
+
+game/
+petState.ts
+petActions.ts
+petSimulation.ts
+petPersonality.ts
+petMood.ts
+progression.ts
+missions.ts
+
+services/
+aiService.ts
+speechService.ts
+audioService.ts
+storageService.ts
+
+data/
+foods.ts
+toys.ts
+accessories.ts
+decorations.ts
+missions.ts
+dialogue.ts
+
+hooks/
+usePet.ts
+useGameLoop.ts
+useSpeech.ts
+
+types/
+pet.ts
+items.ts
+game.ts
+
+utils/
+time.ts
+random.ts
+validation.ts
+
+Adapte a estrutura se houver uma solução melhor.
+
+Não crie arquivos gigantes.
+
+==================================================
+SEGURANÇA
+
+Nunca:
+
+exponha API keys;
+
+coloque secrets no frontend;
+
+execute código retornado pela IA;
+
+use HTML inseguro sem necessidade;
+
+confie cegamente em entrada do usuário.
+
+Valide mensagens.
+
+Limite tamanho das entradas.
+
+==================================================
+PERFORMANCE
+
+Otimize:
+
+renderizações;
+
+timers;
+
+animações;
+
+áudio;
+
+eventos;
+
+chamadas de IA.
+
+Limpe:
+
+setInterval;
+
+setTimeout;
+
+listeners;
+
+subscriptions.
+
+Evite loops desnecessários.
+
+==================================================
+DESIGN
+
+Quero aparência de jogo mobile casual premium.
+
+Características:
+
+fofo;
+
+colorido;
+
+moderno;
+
+limpo;
+
+agradável;
+
+responsivo.
+
+Crie identidade visual completamente original.
+
+O personagem deve ser o foco principal.
+
+Use microanimações.
+
+==================================================
+LOADING E ERROS
+
+Toda operação assíncrona deve possuir:
+
+loading;
+
+estado de erro;
+
+tentativa novamente quando apropriado.
+
+Não mostre stack trace ao jogador.
+
+==================================================
+TESTES
+
+Depois de implementar:
+
+instale dependências;
+
+rode o projeto;
+
+rode TypeScript;
+
+rode testes disponíveis;
+
+faça build;
+
+corrija todos os erros;
+
+verifique console;
+
+teste reload;
+
+teste persistência;
+
+teste reset;
+
+teste loja;
+
+teste inventário;
+
+teste missões;
+
+teste minigames;
+
+teste animações;
+
+teste voz sem microfone;
+
+teste sem API de IA;
+
+teste sem áudio;
+
+teste responsividade.
+
+Se houver ferramentas de navegador disponíveis, use-as.
+
+==================================================
+README
+
+Crie ou atualize README.md contendo:
+
+descrição;
+
+tecnologias;
+
+instalação;
+
+execução;
+
+build;
+
+variáveis de ambiente;
+
+configuração da IA;
+
+configuração da voz;
+
+estrutura do projeto.
+
+==================================================
+ORDEM DE EXECUÇÃO
+
+FASE 1:
+
+analisar projeto;
+
+criar estrutura;
+
+personagem;
+
+cenário;
+
+interface;
+
+necessidades;
+
+ações;
+
+game loop;
+
+persistência.
+
+FASE 2:
+
+humor;
+
+diálogos;
+
+animações;
+
+efeitos;
+
+áudio.
+
+FASE 3:
+
+moedas;
+
+loja;
+
+inventário;
+
+XP;
+
+níveis;
+
+missões.
+
+FASE 4:
+
+minigames.
+
+FASE 5:
+
+chat;
+
+IA;
+
+voz.
+
+FASE 6:
+
+configurações;
+
+acessibilidade;
+
+responsividade;
+
+otimização.
+
+FASE 7:
+
+testes;
+
+build;
+
+correção;
+
+README.
+
+NÃO pare na primeira fase.
+
+Continue até terminar tudo.
+
+==================================================
+CRITÉRIO FINAL
+
+O projeto só está concluído quando:
+
+inicia sem erros;
+
+o personagem aparece;
+
+o personagem possui animações;
+
+necessidades funcionam;
+
+ações funcionam;
+
+humor funciona;
+
+progresso salva;
+
+reload mantém progresso;
+
+loja funciona;
+
+inventário funciona;
+
+missões funcionam;
+
+minigames funcionam;
+
+diálogos funcionam;
+
+fallback de IA funciona;
+
+integração de IA está preparada;
+
+voz não quebra o jogo;
+
+áudio funciona e pode ser desligado;
+
+configurações funcionam;
+
+interface é responsiva;
+
+build passa.
+
+Se alguma funcionalidade externa exigir uma API ou credencial:
+
+implemente fallback local;
+
+prepare a integração;
+
+documente a configuração.
+
+Não entregue botões falsos ou funcionalidades apenas visuais.
+
+==================================================
+COMECE AGORA
+
+Analise o projeto atual e comece a implementar.
+
+Não apenas explique.
+
+CRIE O PROJETO.
+
+EXECUTE.
+
+TESTE.
+
+CORRIJA.
+
+CONTINUE ATÉ TER UMA VERSÃO JOGÁVEL COMPLETA.
